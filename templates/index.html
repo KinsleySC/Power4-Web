@@ -9,12 +9,55 @@
     <h1>Puissance 4</h1>
 
     <form method="POST" action="/play">
-        <label for="column">Choisir une colonne (0-6) :</label>
-        <input type="number" id="column" name="column" min="0" max="6" required>
         <button type="submit">Jouer</button>
     </form>
 
-    // Faudra mettre la grille du Puissance 4 ici.
-
+</head>
+ 
+ 
+    <body>
+ 
+ 
+<canvas id="structure" width="2000" height="650"> </canvas> 
+     
+ 
+        <script>
+     
+ 
+  var canvas = document.getElementById("structure");
+  var context = canvas.getContext("2d");
+   
+   
+  //Rectangle
+  context.beginPath();
+  context.fillStyle="blue";  
+  context.lineWidth="10";  
+  context.rect(500,50,600,515);
+  context.fill();
+  context.closePath();
+   
+  
+  
+   
+  //Cercle
+  context.beginPath();
+  context.fillStyle = "white";
+   
+  
+for(i=0;i<=5;i++)
+{
+ for(j=0;j<=6;j++)
+  {
+  context.arc(545+85*j,95+85*i,35,Math.PI*2,false); 
+  context.fill();
+  context.beginPath();
+  }
+  }
+  
+   
+        </script> 
+    
+     
+    </body>
 </body>
 </html>
