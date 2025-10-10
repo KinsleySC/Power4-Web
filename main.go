@@ -28,7 +28,7 @@ func playHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	column := r.FormValue("column")
 
-	log.Println("Colonne jouée :", column)
+	log.Println("Column play :", column)
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
