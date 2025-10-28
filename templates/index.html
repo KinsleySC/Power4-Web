@@ -1,63 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Puissance 4</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/style.css" />
 </head>
 <body>
     <h1>Puissance 4</h1>
 
-    <form method="POST" action="/play">
-        <button type="submit">Jouer</button>
-    </form>
+    <div class="status">
+        {{ if .GameOver }}
+            {{ if eq .Winner 0 }}
+                Partie terminée : Match nul !
+            {{ else }}
+                Le joueur {{ .Winner }} a gagné !
+            {{ end }}
+        {{ else }}
+            Au tour du joueur {{ .Current }}
+        {{ end }}
+    </div>
 
-</head>
- 
- 
-    <body>
- 
- 
-<canvas id="structure" width="2000" height="650"> </canvas> 
-     
- 
-        <script>
-     
- 
-  var canvas = document.getElementById("structure");
-  var context = canvas.getContext("2d");
-   
-   
-  //Rectangle
-  context.beginPath();
-  context.fillStyle="blue";  
-  context.lineWidth="10";  
-  context.rect(500,50,600,515);
-  context.fill();
-  context.closePath();
-   
-  
-  
-   
-  //Cercle
-  context.beginPath();
-  context.fillStyle = "white";
-   
-  
-for(i=0;i<=5;i++)
-{
- for(j=0;j<=6;j++)
-  {
-  context.arc(545+85*j,95+85*i,35,Math.PI*2,false); 
-  context.fill();
-  context.beginPath();
-  }
-  }
-  
-   
-        </script> 
-    
-     
-    </body>
+    <div class="column-buttons">
+        {{ range .Columns }}
+        <form method="POST" action="/play">
+            <input type="hidden" name="column" value="{{ . }}">
+            <button type="submit">C{{ . }}</button>
+        </form>
+        {{ end }}
+    </div>
+
+    <div class="board-container">
+        <table>
+            {{ range $i, $row := .Board }}
+            <tr>
+                {{ range $j, $cell := $row }}
+                <td class="{{ if eq $cell 1 }}player1{{ else if eq $cell 2 }}player2{{ end }}"></td>
+                {{ end }}
+            </tr>
+            {{ end }}
+        </table>
+    </div>
+
+    <div class="reset-button">
+        <form method="POST" action="/reset">
+            <button type="submit">Recommencer</button>
+        </form>
+    </div>
 </body>
 </html>
