@@ -96,7 +96,7 @@ td {
 }
 
 .reset-button button { 
-    border: none;
+    border: 3px solid black; /* Ajout de la bordure noire */
     background: #ff0000; 
     padding: 0.8em 2em;
     width: 200px;
