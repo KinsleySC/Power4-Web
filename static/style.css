@@ -95,24 +95,38 @@ td {
     120% { background: #ff0000; }
 }
 
+@font-face {
+    font-family: 'OptimusPrinceps';
+    src: url('/static/fonts/OptimusPrinceps.ttf') format('truetype');
+}
+
 .reset-button button { 
     border: 3px solid;
     background: black; 
-    padding: 0.8em 0;
-    width: 200px;
+    width: 300px;
+    height: 65px;
     border-radius: 100px; 
     color: white; 
-    font-family: Poppins; 
-    font-size: 1.2rem; 
-    font-weight: 500; 
+    font-family: 'OptimusPrinceps', serif;
+    font-size: 26px;
+    font-weight: normal; 
     cursor: pointer; 
-    text-align: center;
-    line-height: 1;
+    text-transform: uppercase;
     animation: borderRainbow 5s linear infinite;
-    display: flex;
+    display: flex;           /* Changé de grid à flex */
     justify-content: center;
     align-items: center;
+    margin: 0 auto;
+    padding: 0;
+    letter-spacing: -0.5px; /* Ajout d'un petit espacement négatif */
+    transform: translateY(2px);
+    transition: transform 0.3s ease;
+    text-indent: -2px;      /* Ajout d'un décalage négatif */
 } 
+
+.reset-button button:hover {
+    transform: scale(1.1); /* Effet de grossissement au hover */
+}
 
 @keyframes borderRainbow {
     0% { border-color: #ff0000; }
