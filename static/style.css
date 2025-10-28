@@ -79,25 +79,25 @@ td {
 }
 
 .reset-button {
-    margin-top: 35px;
+    margin-top: 30px;
+    text-align: center;
 }
 
-.reset-button form {
-    display: inline-block;
-}
-
-.reset-button button {
-    width: 180px;
-    height: 50px;
-    font-size: 1.2em;
-    background-color: #333;
-    color: white;
+.reset-button button { 
     border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.reset-button button:hover {
-    background-color: #555;
+    background: #ff0000; 
+    padding: 0.8em 6em; 
+    border-radius: 100px; 
+    color: white; 
+    font-family: Poppins; 
+    font-size: 1.2rem; 
+    font-weight: 500; 
+    cursor: pointer; 
+    transition: 150ms ease;
+    text-align: center;
+    line-height: 1.2;
+} 
+.reset-button button:hover { 
+    background-color: #f04444; 
+    scale: 2; 
 }
