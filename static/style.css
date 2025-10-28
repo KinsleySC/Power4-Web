@@ -86,22 +86,33 @@ td {
     align-items: center;
 }
 
+@keyframes rainbow {
+    0% { background: #ff0000; }
+    20% { background: #ff8800; }
+    40% { background: #ffff00; }
+    60% { background: #00ff00; }
+    80% { background: #0000ff; }
+    100% { background: #ff0000; }
+}
+
 .reset-button button { 
     border: none;
     background: #ff0000; 
     padding: 0.8em 2em;
     width: 200px;
     border-radius: 100px; 
-    color: white; 
+    color: rgb(0, 0, 0); 
     font-family: Poppins; 
     font-size: 1.2rem; 
     font-weight: 500; 
     cursor: pointer; 
-    transition: 150ms ease;
     text-align: center;
     line-height: 1;
+    animation: rainbow 5s linear infinite;
 } 
+
 .reset-button button:hover { 
-    background-color: #f04444; 
-    scale: 2; 
+    scale: 1.1;
+    filter: brightness(1.2);
+    transition: all 0.3s ease;
 }
