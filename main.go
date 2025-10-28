@@ -125,42 +125,9 @@ func playHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Erreur lors de l'analyse du formulaire", http.StatusBadRequest)
 		return
 	}
+	column := r.FormValue("column")
 
-	colStr := r.FormValue("column")
-	col, err := strconv.Atoi(colStr)
-	if err != nil || col < 0 || col >= columns {
-		http.Error(w, "Colonne invalide", http.StatusBadRequest)
-		return
-	}
-
-	row := -1
-	for r := rows - 1; r >= 0; r-- {
-		if game.Board[r][col] == 0 {
-			row = r
-			break
-		}
-	}
-
-	if row == -1 {
-		// Colonne pleine, ignore la saisie
-		http.Redirect(w, r, "/", http.StatusSeeOther)
-		return
-	}
-
-	game.Board[row][col] = game.Current
-
-	if game.CheckWin(row, col) {
-		game.Winner = game.Current
-		game.GameOver = true
-	} else if game.IsDraw() {
-		game.GameOver = true
-	} else {
-		if game.Current == 1 {
-			game.Current = 2
-		} else {
-			game.Current = 1
-		}
-	}
+	log.Println("Columnù6 play :", column)
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
