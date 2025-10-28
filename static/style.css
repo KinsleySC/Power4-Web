@@ -81,12 +81,16 @@ td {
 .reset-button {
     margin-top: 30px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .reset-button button { 
     border: none;
     background: #ff0000; 
-    padding: 0.8em 6em; 
+    padding: 0.8em 2em;
+    width: 200px;
     border-radius: 100px; 
     color: white; 
     font-family: Poppins; 
@@ -95,7 +99,7 @@ td {
     cursor: pointer; 
     transition: 150ms ease;
     text-align: center;
-    line-height: 1.2;
+    line-height: 1;
 } 
 .reset-button button:hover { 
     background-color: #f04444; 
