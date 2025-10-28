@@ -6,14 +6,28 @@ body {
     padding: 20px;
 }
 
+@font-face {
+    font-family: 'OptimusPrinceps';
+    src: url('/static/fonts/OptimusPrinceps.ttf') format('truetype');
+}
+
 h1 {
-    font-size: 3em;
-    color: #333;
+    font-family: 'OptimusPrinceps', serif;
+    font-size: 4.5em;
+    color: #c7b377;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 40px;
+    text-shadow: 0 0 10px rgba(199, 179, 119, 0.5);
+    font-weight: normal;
 }
 
 .status {
+    font-family: 'OptimusPrinceps', serif;
     margin: 20px;
-    font-size: 1.8em;
+    font-size: 2em;
+    color: #333;
+    letter-spacing: 1px;
 }
 
 .column-buttons {
@@ -86,20 +100,6 @@ td {
     align-items: center;
 }
 
-@keyframes rainbow {
-    0% { background: #ff0000; }
-    40% { background: #ff8800; }
-    60% { background: #ffff00; }
-    80% { background: #00ff00; }
-    100% { background: #0000ff; }
-    120% { background: #ff0000; }
-}
-
-@font-face {
-    font-family: 'OptimusPrinceps';
-    src: url('/static/fonts/OptimusPrinceps.ttf') format('truetype');
-}
-
 .reset-button button { 
     border: 3px solid;
     background: black; 
@@ -113,19 +113,28 @@ td {
     cursor: pointer; 
     text-transform: uppercase;
     animation: borderRainbow 5s linear infinite;
-    display: flex;           /* Changé de grid à flex */
+    display: flex;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
     padding: 0;
-    letter-spacing: -0.5px; /* Ajout d'un petit espacement négatif */
+    letter-spacing: -0.5px;
     transform: translateY(2px);
     transition: transform 0.3s ease;
-    text-indent: -2px;      /* Ajout d'un décalage négatif */
+    text-indent: -2px;
 } 
 
 .reset-button button:hover {
-    transform: scale(1.1); /* Effet de grossissement au hover */
+    transform: scale(1.1);
+}
+
+@keyframes rainbow {
+    0% { background: #ff0000; }
+    40% { background: #ff8800; }
+    60% { background: #ffff00; }
+    80% { background: #00ff00; }
+    100% { background: #0000ff; }
+    120% { background: #ff0000; }
 }
 
 @keyframes borderRainbow {
