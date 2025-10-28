@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 const (
@@ -106,6 +107,12 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
+
+	// Ajouter ces logs de débogage
+	log.Printf("État actuel du plateau :")
+	for i := 0; i < rows; i++ {
+		log.Printf("%v", game.Board[i])
+	}
 }
 
 func playHandler(w http.ResponseWriter, r *http.Request) {
@@ -124,9 +131,45 @@ func playHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Erreur lors de l'analyse du formulaire", http.StatusBadRequest)
 		return
 	}
-	column := r.FormValue("column")
 
-	log.Println("Columnù6 play :", column)
+	colStr := r.FormValue("column")
+	col, err := strconv.Atoi(colStr)
+	if err != nil {
+		log.Printf("Erreur de conversion: %v", err)
+		http.Error(w, "Colonne invalide", http.StatusBadRequest)
+		return
+	}
+
+	log.Printf("Tentative de jouer dans la colonne %d", col)
+
+	placed := false
+	// Trouver la première position libre dans la colonne (de bas en haut)
+	for row := rows - 1; row >= 0; row-- {
+		if game.Board[row][col] == 0 {
+			// Placer le jeton
+			game.Board[row][col] = game.Current
+			log.Printf("Jeton placé en [%d,%d] pour le joueur %d", row, col, game.Current)
+			placed = true
+
+			if game.CheckWin(row, col) {
+				game.Winner = game.Current
+				game.GameOver = true
+				log.Printf("Victoire du joueur %d", game.Current)
+			} else if game.IsDraw() {
+				game.GameOver = true
+				log.Printf("Match nul")
+			} else {
+				// Changer de joueur
+				game.Current = 3 - game.Current // Alterne entre 1 et 2
+				log.Printf("Au tour du joueur %d", game.Current)
+			}
+			break
+		}
+	}
+
+	if !placed {
+		log.Printf("Impossible de placer un jeton dans la colonne %d", col)
+	}
 
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
@@ -139,6 +182,8 @@ func resetHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	log.SetFlags(log.Lshortfile | log.LstdFlags)
+
 	http.HandleFunc("/", homeHandler)
 	http.HandleFunc("/play", playHandler)
 	http.HandleFunc("/reset", resetHandler)
@@ -146,7 +191,7 @@ func main() {
 	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
-	log.Println("Serveur démarré sur http://localhost:8080")
+	log.Println("Routes configurées, serveur démarré sur http://localhost:8080")
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		log.Fatal(err)
