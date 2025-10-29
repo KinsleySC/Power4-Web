@@ -116,8 +116,19 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func playHandler(w http.ResponseWriter, r *http.Request) {
+	// Ajouter les en-têtes CORS
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
+	// Gérer la requête OPTIONS pour CORS
+	if r.Method == "OPTIONS" {
+		w.WriteHeader(http.StatusOK)
+		return
+	}
+
 	if r.Method != http.MethodPost {
-		http.Redirect(w, r, "/", http.StatusSeeOther)
+		http.Error(w, "Méthode non autorisée", http.StatusMethodNotAllowed)
 		return
 	}
 
@@ -128,11 +139,14 @@ func playHandler(w http.ResponseWriter, r *http.Request) {
 
 	err := r.ParseForm()
 	if err != nil {
+		log.Printf("Erreur ParseForm: %v", err)
 		http.Error(w, "Erreur lors de l'analyse du formulaire", http.StatusBadRequest)
 		return
 	}
 
 	colStr := r.FormValue("column")
+	log.Printf("Colonne reçue: %s", colStr)
+
 	col, err := strconv.Atoi(colStr)
 	if err != nil {
 		log.Printf("Erreur de conversion: %v", err)

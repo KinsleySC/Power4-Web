@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <title>Puissance 4</title>
-    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <h1>Puissance 4</h1>
@@ -20,21 +20,12 @@
         {{ end }}
     </div>
 
-    <div class="column-buttons">
-        {{ range .Columns }}
-        <form method="POST" action="/play">
-            <input type="hidden" name="column" value="{{ . }}">
-            <button type="submit">C{{ . }}</button>
-        </form>
-        {{ end }}
-    </div>
-
     <div class="board-container">
         <table>
             {{ range $i, $row := .Board }}
             <tr>
                 {{ range $j, $cell := $row }}
-                <td class="{{ if eq $cell 1 }}player1{{ else if eq $cell 2 }}player2{{ end }}"></td>
+                <td data-column="{{ $j }}" class="{{ if eq $cell 1 }}player1{{ else if eq $cell 2 }}player2{{ end }}"></td>
                 {{ end }}
             </tr>
             {{ end }}
@@ -42,9 +33,8 @@
     </div>
 
     <div class="reset-button">
-        <button>
-            <span>R</span>ecommencer
-        </button>
+        <button onclick="window.location='/reset'">Recommencer</button>
     </div>
+    <script src="/static/script.js"></script>
 </body>
 </html>
