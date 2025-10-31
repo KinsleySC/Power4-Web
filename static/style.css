@@ -112,11 +112,11 @@ td {
 }
 
 .player1 {
-    background-color: red !important;
+    background-color: grey !important;
 }
 
 .player2 {
-    background-color: yellow !important;
+    background-color: purple !important;
 }
 
 .reset-button {

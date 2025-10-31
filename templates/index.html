@@ -33,7 +33,9 @@
     </div>
 
     <div class="reset-button">
-        <button onclick="window.location='/reset'">Recommencer</button>
+        <form method="POST" action="/reset">
+            <button type="submit">Recommencer</button>
+        </form>
     </div>
     <script src="/static/script.js"></script>
 </body>
