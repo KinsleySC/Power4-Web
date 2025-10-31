@@ -1,0 +1,22 @@
+package main
+
+import (
+    "log"
+    "net/http"
+)
+
+func main() {
+    // sert tout le dossier ./static sur la racine "/"
+    fs := http.FileServer(http.Dir("./static"))
+    http.Handle("/", fs)
+
+    log.Println("Serving on http://localhost:8080")
+    log.Fatal(http.ListenAndServe(":8080", nil))
+}
+<!doctype html>
+<html>
+  <body>
+    <h1>Image test</h1>
+    <img src="/image.png" alt="Mon image">
+  </body>
+</html>

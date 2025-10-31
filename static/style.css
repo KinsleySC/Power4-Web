@@ -1,0 +1,16 @@
+/* Basic styles for Power4-Web */
+:root{ --bg:#f5f7fb; --text:#222 }
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 20px;
+	background: var(--bg);
+	color: var(--text);
+}
+
+main{ max-width:1200px; margin:0 auto }
+
+h1{ margin-bottom:10px }
+
+canvas#structure{ display:block; width:100%; height:auto; border:1px solid #ddd }
+
+button{ padding:8px 14px; font-size:16px; cursor:pointer }
