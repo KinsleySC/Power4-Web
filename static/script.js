@@ -17,21 +17,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const cell = e.target;
         if (cell.tagName === 'TD') {
 
-            document.querySelectorAll('.hover-effect').forEach(el => {
-                el.classList.remove('hover-effect');
+            document.querySelectorAll('.hover-effect-1, .hover-effect-2').forEach(el => {
+                el.classList.remove('hover-effect-1', 'hover-effect-2');
             });
             
             const colIndex = cell.cellIndex;
             const lowestCell = findLowestEmptyCell(colIndex);
             if (lowestCell) {
-                lowestCell.classList.add('hover-effect');
+                const currentPlayer = document.querySelector('.status').textContent.includes('joueur 1') ? 1 : 2;
+                lowestCell.classList.add(`hover-effect-${currentPlayer}`);
             }
         }
     });
     
     table.addEventListener('mouseleave', () => {
-        document.querySelectorAll('.hover-effect').forEach(el => {
-            el.classList.remove('hover-effect');
+        document.querySelectorAll('.hover-effect-1, .hover-effect-2').forEach(el => {
+            el.classList.remove('hover-effect-1', 'hover-effect-2');
         });
     });
     
