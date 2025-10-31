@@ -14,8 +14,8 @@ const (
 
 type Game struct {
 	Board    [][]int
-	Current  int // Joueur courant (1 ou 2)
-	Winner   int // 0 = pas de gagnant, 1 ou 2 = gagnant
+	Current  int
+	Winner   int
 	GameOver bool
 }
 
@@ -41,10 +41,10 @@ func (g *Game) CheckWin(row, col int) bool {
 	player := g.Board[row][col]
 
 	directions := [][2]int{
-		{0, 1},  // horizontal
-		{1, 0},  // vertical
-		{1, 1},  // diagonale descendante
-		{1, -1}, // diagonale montante
+		{0, 1},
+		{1, 0},
+		{1, 1},
+		{1, -1},
 	}
 
 	for _, d := range directions {
@@ -108,7 +108,6 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 
-	// Ajouter ces logs de débogage
 	log.Printf("État actuel du plateau :")
 	for i := 0; i < rows; i++ {
 		log.Printf("%v", game.Board[i])
@@ -116,12 +115,10 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func playHandler(w http.ResponseWriter, r *http.Request) {
-	// Ajouter les en-têtes CORS
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
-	// Gérer la requête OPTIONS pour CORS
 	if r.Method == "OPTIONS" {
 		w.WriteHeader(http.StatusOK)
 		return
@@ -157,10 +154,9 @@ func playHandler(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Tentative de jouer dans la colonne %d", col)
 
 	placed := false
-	// Trouver la première position libre dans la colonne (de bas en haut)
 	for row := rows - 1; row >= 0; row-- {
 		if game.Board[row][col] == 0 {
-			// Placer le jeton
+
 			game.Board[row][col] = game.Current
 			log.Printf("Jeton placé en [%d,%d] pour le joueur %d", row, col, game.Current)
 			placed = true
@@ -173,8 +169,8 @@ func playHandler(w http.ResponseWriter, r *http.Request) {
 				game.GameOver = true
 				log.Printf("Match nul")
 			} else {
-				// Changer de joueur
-				game.Current = 3 - game.Current // Alterne entre 1 et 2
+
+				game.Current = 3 - game.Current
 				log.Printf("Au tour du joueur %d", game.Current)
 			}
 			break

@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const table = document.querySelector('table');
     const rows = table.querySelectorAll('tr');
     
-    // Fonction pour trouver la cellule disponible la plus basse dans une colonne
     function findLowestEmptyCell(colIndex) {
         for (let rowIndex = rows.length - 1; rowIndex >= 0; rowIndex--) {
             const cell = rows[rowIndex].children[colIndex];
@@ -13,11 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return null;
     }
     
-    // Gestionnaire de survol
+
     table.addEventListener('mouseover', (e) => {
         const cell = e.target;
         if (cell.tagName === 'TD') {
-            // Supprimer l'effet de tous les éléments
+
             document.querySelectorAll('.hover-effect').forEach(el => {
                 el.classList.remove('hover-effect');
             });
@@ -30,20 +29,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    // Supprimer l'effet quand la souris quitte le tableau
     table.addEventListener('mouseleave', () => {
         document.querySelectorAll('.hover-effect').forEach(el => {
             el.classList.remove('hover-effect');
         });
     });
     
-    // Gestionnaire de clic - Version formulaire simple
     table.addEventListener('click', (e) => {
         const cell = e.target;
         if (cell.tagName === 'TD') {
             const column = cell.dataset.column;
-            
-            // Créer un formulaire et le soumettre
+
             const form = document.createElement('form');
             form.method = 'POST';
             form.action = '/play';
