@@ -36,23 +36,53 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    table.addEventListener('click', (e) => {
+    table.addEventListener('click', async (e) => {
         const cell = e.target;
         if (cell.tagName === 'TD') {
-            const column = cell.dataset.column;
+            // Vérifier si le jeu est terminé
+            const statusText = document.querySelector('.status').textContent;
+            if (statusText.includes('gagné') || statusText.includes('Match nul')) {
+                return; // Arrêter si le jeu est terminé
+            }
 
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = '/play';
+            const colIndex = cell.dataset.column;
+            const lowestCell = findLowestEmptyCell(parseInt(colIndex));
             
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = 'column';
-            input.value = column;
-            
-            form.appendChild(input);
-            document.body.appendChild(form);
-            form.submit();
+            if (lowestCell) {
+                try {
+                    const response = await fetch('/play', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: `column=${colIndex}`,
+                    });
+
+                    if (response.ok) {
+                        const currentPlayer = document.querySelector('.status').textContent.includes('joueur 1') ? 1 : 2;
+                        
+                        // Nettoyer d'abord toutes les classes
+                        lowestCell.className = '';
+                        
+                        // Ajouter les nouvelles classes dans le bon ordre
+                        lowestCell.classList.add(`player${currentPlayer}`);
+                        lowestCell.classList.add('dropping');
+                        
+                        setTimeout(() => {
+                            lowestCell.classList.remove('dropping');
+                        }, 500);
+
+                        const newDoc = await response.text();
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(newDoc, 'text/html');
+                        
+                        const newStatus = doc.querySelector('.status').innerHTML;
+                        document.querySelector('.status').innerHTML = newStatus;
+                    }
+                } catch (error) {
+                    console.error('Erreur:', error);
+                }
+            }
         }
     });
 });
