@@ -6,7 +6,18 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <h1>Puissance 4</h1>
+    <!-- Écran de démarrage avec l'image Start Game -->
+    <div class="start-screen" id="startScreen">
+        <img src="/static/images/start_game.svg" alt="Start Game" class="start-game-image">
+        <button class="play-button" onclick="startGame()">Jouer</button>
+    </div>
+
+    <!-- Contenu du jeu (caché au démarrage) -->
+    <div class="game-content" id="gameContent" style="display: none;">
+        <div class="logo">
+            <img src="/static/images/logo.png" alt="Logo Puissance 4" width="200">
+        </div>
+        <h1>Puissance 4</h1>
 
     <div class="status">
         {{ if .GameOver }}
@@ -32,11 +43,13 @@
         </table>
     </div>
 
-    <div class="reset-button">
-        <form method="POST" action="/reset">
-            <button type="submit">Recommencer</button>
-        </form>
+        <div class="reset-button">
+            <form method="POST" action="/reset">
+                <button type="submit">Recommencer</button>
+            </form>
+        </div>
     </div>
+
     <script src="/static/script.js"></script>
 </body>
 </html>

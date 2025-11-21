@@ -1,0 +1,36 @@
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fond dégradé -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16213e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c7b377;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e0d4a6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Fond -->
+  <rect width="800" height="400" fill="url(#bgGradient)"/>
+  
+  <!-- Titre "START GAME" -->
+  <text x="400" y="150" font-family="Arial, sans-serif" font-size="80" font-weight="bold" text-anchor="middle" fill="url(#textGradient)" letter-spacing="8">
+    START GAME
+  </text>
+  
+  <!-- Effet de glow autour du texte -->
+  <text x="400" y="150" font-family="Arial, sans-serif" font-size="80" font-weight="bold" text-anchor="middle" fill="none" stroke="#c7b377" stroke-width="2" opacity="0.5" letter-spacing="8">
+    START GAME
+  </text>
+  
+  <!-- Décoration - cercles -->
+  <circle cx="150" cy="200" r="30" fill="none" stroke="#c7b377" stroke-width="2" opacity="0.3"/>
+  <circle cx="150" cy="200" r="20" fill="none" stroke="#c7b377" stroke-width="1" opacity="0.2"/>
+  
+  <circle cx="650" cy="200" r="30" fill="none" stroke="#c7b377" stroke-width="2" opacity="0.3"/>
+  <circle cx="650" cy="200" r="20" fill="none" stroke="#c7b377" stroke-width="1" opacity="0.2"/>
+  
+  <!-- Ligne décorative -->
+  <line x1="200" y1="220" x2="600" y2="220" stroke="#c7b377" stroke-width="2" opacity="0.4"/>
+</svg>

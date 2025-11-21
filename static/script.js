@@ -1,3 +1,13 @@
+// Fonction pour démarrer le jeu
+function startGame() {
+    const startScreen = document.getElementById('startScreen');
+    const gameContent = document.getElementById('gameContent');
+    
+    startScreen.style.display = 'none';
+    gameContent.style.display = 'block';
+    document.body.style.overflow = 'auto';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const table = document.querySelector('table');
     const rows = table.querySelectorAll('tr');
