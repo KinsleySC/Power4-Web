@@ -12,20 +12,43 @@ document.addEventListener('DOMContentLoaded', () => {
         return null;
     }
     
+    // Ajouter cette fonction après findLowestEmptyCell
+    function calculateDropDistance() {
+        const tableTop = table.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        return Math.max(windowHeight - tableTop, 1000); // Au moins 1000px ou la distance jusqu'en haut
+    }
 
     table.addEventListener('mouseover', (e) => {
         const cell = e.target;
         if (cell.tagName === 'TD') {
+            // Vérifier si le jeu est terminé
+            const statusText = document.querySelector('.status').textContent;
+            if (statusText.includes('gagné') || statusText.includes('Match nul')) {
+                return;
+            }
 
+            const column = e.target.closest('td').dataset.column;
+            const currentPlayer = document.querySelector('.status').textContent.includes('joueur 1') ? 1 : 2;
+
+            // Supprimer tous les effets hover précédents
             document.querySelectorAll('.hover-effect-1, .hover-effect-2').forEach(el => {
                 el.classList.remove('hover-effect-1', 'hover-effect-2');
             });
-            
-            const colIndex = cell.cellIndex;
-            const lowestCell = findLowestEmptyCell(colIndex);
-            if (lowestCell) {
-                const currentPlayer = document.querySelector('.status').textContent.includes('joueur 1') ? 1 : 2;
-                lowestCell.classList.add(`hover-effect-${currentPlayer}`);
+
+            // Trouver la cellule la plus basse dans la colonne
+            let lowestEmpty = null;
+            const cells = document.querySelectorAll(`td[data-column="${column}"]`);
+            for (let i = cells.length - 1; i >= 0; i--) {
+                if (!cells[i].classList.contains('player1') && !cells[i].classList.contains('player2')) {
+                    lowestEmpty = cells[i];
+                    break;
+                }
+            }
+
+            // Ajouter l'effet hover à la cellule la plus basse vide
+            if (lowestEmpty) {
+                lowestEmpty.classList.add(`hover-effect-${currentPlayer}`);
             }
         }
     });
@@ -60,9 +83,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     if (response.ok) {
                         const currentPlayer = document.querySelector('.status').textContent.includes('joueur 1') ? 1 : 2;
+                        const dropDistance = calculateDropDistance();
                         
                         // Nettoyer d'abord toutes les classes
                         lowestCell.className = '';
+                        
+                        // Définir la variable CSS personnalisée pour la distance
+                        lowestCell.style.setProperty('--drop-distance', `${dropDistance}px`);
                         
                         // Ajouter les nouvelles classes dans le bon ordre
                         lowestCell.classList.add(`player${currentPlayer}`);
@@ -70,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         
                         setTimeout(() => {
                             lowestCell.classList.remove('dropping');
-                        }, 500);
+                        }, 600); // Réduit de 800ms à 600ms
 
                         const newDoc = await response.text();
                         const parser = new DOMParser();

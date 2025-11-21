@@ -108,31 +108,50 @@ td {
 }
 
 .player1 {
-    background: radial-gradient(circle at 30% 30%, #8b0000, #3d0000);
-    box-shadow: 0 0 15px rgba(139, 0, 0, 0.6),
-                inset 0 0 20px rgba(255, 69, 0, 0.3);
+    background: radial-gradient(circle at 35% 35%, #ff6b00, #ff4500, #cc3700, #8b0000, #3a0000);
+    box-shadow: 0 0 15px rgba(255, 69, 0, 0.5),
+                0 0 30px rgba(255, 100, 0, 0.25),
+                inset 0 0 20px rgba(255, 140, 0, 0.3),
+                inset -10px -10px 25px rgba(0, 0, 0, 0.7),
+                inset 5px 5px 15px rgba(255, 200, 0, 0.2);
     border: none;
+    animation: emberPulse 2s ease-in-out infinite;
 }
 
 .player2 {
-    background: radial-gradient(circle at 30% 30%, #104e8b, #000c18);
-    box-shadow: 0 0 15px rgba(16, 78, 139, 0.6),
-                inset 0 0 20px rgba(30, 144, 255, 0.2);
+    background: radial-gradient(circle at 35% 35%, #5fceeb, #48d1cc, #20b2aa, #104e8b, #002040);
+    box-shadow: 0 0 15px rgba(72, 209, 204, 0.5),
+                0 0 30px rgba(100, 220, 220, 0.25),
+                inset 0 0 20px rgba(224, 255, 255, 0.3),
+                inset -10px -10px 25px rgba(0, 0, 0, 0.7),
+                inset 5px 5px 15px rgba(150, 240, 255, 0.2);
     border: none;
+    animation: soulPulse 2s ease-in-out infinite;
 }
 
 .dropping {
-    animation: dropToken 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: dropToken 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    transform-origin: center center;
 }
 
 .hover-effect-1 {
-    background: radial-gradient(circle at 30% 30%, rgba(139, 0, 0, 0.5), rgba(61, 0, 0, 0.5)) !important;
-    box-shadow: 0 0 15px rgba(139, 0, 0, 0.3);
+    background: radial-gradient(circle at 35% 35%, rgba(255, 107, 0, 0.35), rgba(255, 69, 0, 0.25), rgba(204, 55, 0, 0.15)) !important;
+    box-shadow: 0 0 12px rgba(255, 69, 0, 0.4),
+                0 0 25px rgba(255, 100, 0, 0.2),
+                inset 0 0 15px rgba(255, 140, 0, 0.25),
+                inset -8px -8px 20px rgba(0, 0, 0, 0.5);
+    border: none;
+    animation: emberPulse 1.5s ease-in-out infinite;
 }
 
 .hover-effect-2 {
-    background: radial-gradient(circle at 30% 30%, rgba(16, 78, 139, 0.5), rgba(0, 12, 24, 0.5)) !important;
-    box-shadow: 0 0 15px rgba(16, 78, 139, 0.3);
+    background: radial-gradient(circle at 35% 35%, rgba(95, 206, 235, 0.35), rgba(72, 209, 204, 0.25), rgba(32, 178, 170, 0.15)) !important;
+    box-shadow: 0 0 12px rgba(72, 209, 204, 0.4),
+                0 0 25px rgba(100, 220, 220, 0.2),
+                inset 0 0 15px rgba(224, 255, 255, 0.25),
+                inset -8px -8px 20px rgba(0, 0, 0, 0.5);
+    border: none;
+    animation: soulPulse 1.5s ease-in-out infinite;
 }
 
 .reset-button {
@@ -199,39 +218,67 @@ td {
     50% { box-shadow: 0 0 20px #48d1cc, 0 0 35px #e0ffff, inset 0 0 25px rgba(224, 255, 255, 0.9); }
 }
 
-@keyframes emberGlow {
+@keyframes emberPulse {
     0%, 100% { 
-        box-shadow: 0 0 15px rgba(139, 0, 0, 0.6),
-                   inset 0 0 20px rgba(255, 69, 0, 0.3);
+        box-shadow: 0 0 15px rgba(255, 69, 0, 0.5),
+                   0 0 30px rgba(255, 100, 0, 0.25),
+                   inset 0 0 20px rgba(255, 140, 0, 0.3),
+                   inset -10px -10px 25px rgba(0, 0, 0, 0.7),
+                   inset 5px 5px 15px rgba(255, 200, 0, 0.2);
+        filter: brightness(1);
     }
     50% { 
-        box-shadow: 0 0 20px rgba(139, 0, 0, 0.8),
-                   inset 0 0 25px rgba(255, 69, 0, 0.4);
+        box-shadow: 0 0 20px rgba(255, 69, 0, 0.65),
+                   0 0 40px rgba(255, 100, 0, 0.35),
+                   inset 0 0 25px rgba(255, 140, 0, 0.4),
+                   inset -10px -10px 25px rgba(0, 0, 0, 0.7),
+                   inset 5px 5px 18px rgba(255, 200, 0, 0.3);
+        filter: brightness(1.1);
     }
 }
 
-@keyframes soulGlow {
+@keyframes soulPulse {
     0%, 100% { 
-        box-shadow: 0 0 15px rgba(16, 78, 139, 0.6),
-                   inset 0 0 20px rgba(30, 144, 255, 0.2);
+        box-shadow: 0 0 15px rgba(72, 209, 204, 0.5),
+                   0 0 30px rgba(100, 220, 220, 0.25),
+                   inset 0 0 20px rgba(224, 255, 255, 0.3),
+                   inset -10px -10px 25px rgba(0, 0, 0, 0.7),
+                   inset 5px 5px 15px rgba(150, 240, 255, 0.2);
+        filter: brightness(1);
     }
     50% { 
-        box-shadow: 0 0 20px rgba(16, 78, 139, 0.8),
-                   inset 0 0 25px rgba(30, 144, 255, 0.3);
+        box-shadow: 0 0 20px rgba(72, 209, 204, 0.65),
+                   0 0 40px rgba(100, 220, 220, 0.35),
+                   inset 0 0 25px rgba(224, 255, 255, 0.4),
+                   inset -10px -10px 25px rgba(0, 0, 0, 0.7),
+                   inset 5px 5px 18px rgba(150, 240, 255, 0.3);
+        filter: brightness(1.1);
     }
 }
 
 @keyframes dropToken {
     0% {
-        transform: translateY(-400px);
+        transform: translateY(calc(-1 * var(--drop-distance))) rotate(0deg);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateY(calc(-0.5 * var(--drop-distance))) rotate(180deg);
+        opacity: 0.85;
     }
     70% {
-        transform: translateY(20px);
+        transform: translateY(30px) rotate(360deg);
+        opacity: 1;
     }
     85% {
-        transform: translateY(-10px);
+        transform: translateY(-15px) rotate(360deg);
+    }
+    92% {
+        transform: translateY(7px) rotate(360deg);
+    }
+    96% {
+        transform: translateY(-3px) rotate(360deg);
     }
     100% {
-        transform: translateY(0);
+        transform: translateY(0) rotate(360deg);
     }
 }
