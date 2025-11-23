@@ -18,11 +18,32 @@ document.addEventListener('DOMContentLoaded', () => {
         return Math.max(windowHeight - tableTop, 1000);
     }
 
+    function checkVictory() {
+        const statusText = document.querySelector('.status').textContent;
+        
+        if (statusText.includes('Victoire')) {
+            const boardContainer = document.querySelector('.board-container');
+            const statusElement = document.querySelector('.status');
+            
+            // Déterminer quel joueur a gagné
+            if (statusText.includes('joueur 1')) {
+                boardContainer.classList.add('victory-player1');
+                statusElement.classList.add('victory', 'player1-win');
+            } else if (statusText.includes('joueur 2')) {
+                boardContainer.classList.add('victory-player2');
+                statusElement.classList.add('victory', 'player2-win');
+            }
+        }
+    }
+
+    // Vérifier au chargement de la page si c'est déjà une victoire
+    checkVictory();
+
     table.addEventListener('mouseover', (e) => {
         const cell = e.target;
         if (cell.tagName === 'TD') {
             const statusText = document.querySelector('.status').textContent;
-            if (statusText.includes('gagné') || statusText.includes('Match nul')) {
+            if (statusText.includes('Victoire') || statusText.includes('Match nul')) {
                 return;
             }
 
@@ -96,6 +117,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         
                         const newStatus = doc.querySelector('.status').innerHTML;
                         document.querySelector('.status').innerHTML = newStatus;
+                        
+                        // Vérifier si quelqu'un a gagné
+                        setTimeout(() => {
+                            checkVictory();
+                        }, 700);
                     }
                 } catch (error) {
                     console.error('Erreur:', error);

@@ -20,7 +20,6 @@ type Game struct {
 }
 
 var (
-	tmpl = template.Must(template.ParseFiles("templates/index.html"))
 	game = NewGame()
 )
 
@@ -87,6 +86,8 @@ func (g *Game) IsDraw() bool {
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+
 	draw := game.GameOver && game.Winner == 0
 
 	data := struct {
@@ -108,6 +109,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 		data.Columns[i] = i
 	}
 
+	tmpl := template.Must(template.ParseFiles("templates/index.html"))
 	err := tmpl.Execute(w, data)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

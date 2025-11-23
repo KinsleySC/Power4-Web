@@ -11,9 +11,9 @@
     <div class="status">
         {{ if .GameOver }}
             {{ if eq .Winner 0 }}
-                Partie terminée : Match nul !
+                Partie terminee : Match nul !
             {{ else }}
-                Le joueur {{ .Winner }} a gagné !
+                Victoire du joueur {{ .Winner }} !
             {{ end }}
         {{ else }}
             Au tour du joueur {{ .Current }}
@@ -31,7 +31,7 @@
             {{ end }}
         </table>
     </div>
-
+    
     <div class="reset-button">
         <form method="POST" action="/reset">
             <button type="submit">Recommencer</button>

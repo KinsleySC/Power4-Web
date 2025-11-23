@@ -28,6 +28,33 @@ h1 {
     font-size: 1.3em;
     color: #333;
     letter-spacing: 1px;
+    transition: all 0.5s ease;
+}
+
+.status.victory {
+    font-size: 2.5em;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin: 25px;
+    animation: victoryPulse 2s ease-in-out infinite;
+}
+
+.status.victory.player1-win {
+    color: #ff4500;
+    text-shadow: 
+        0 0 20px rgba(255, 69, 0, 0.8),
+        0 0 40px rgba(255, 69, 0, 0.5),
+        0 0 60px rgba(255, 69, 0, 0.3),
+        0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.status.victory.player2-win {
+    color: #00bfff;
+    text-shadow: 
+        0 0 20px rgba(0, 191, 255, 0.8),
+        0 0 40px rgba(0, 191, 255, 0.5),
+        0 0 60px rgba(0, 191, 255, 0.3),
+        0 5px 10px rgba(0, 0, 0, 0.5);
 }
 
 .board-container {
@@ -40,6 +67,26 @@ h1 {
     box-shadow: 
         0 10px 40px rgba(0, 0, 0, 0.5),
         inset 0 0 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.8s ease;
+}
+
+.board-container.victory-player1 {
+    box-shadow: 
+        0 0 30px rgba(255, 69, 0, 0.6),
+        0 0 60px rgba(255, 69, 0, 0.4),
+        0 10px 40px rgba(0, 0, 0, 0.5),
+        inset 0 0 30px rgba(255, 69, 0, 0.15);
+    animation: boardGlowOrange 2s ease-in-out infinite;
+}
+
+.board-container.victory-player2 {
+    box-shadow: 
+        0 0 30px rgba(0, 191, 255, 0.6),
+        0 0 60px rgba(0, 191, 255, 0.4),
+        0 10px 40px rgba(0, 0, 0, 0.5),
+        inset 0 0 30px rgba(0, 191, 255, 0.15);
+    animation: boardGlowBlue 2s ease-in-out infinite;
+}
 
     background-image: 
         linear-gradient(95deg, transparent 48%, rgba(0, 0, 0, 0.3) 49%, rgba(0, 0, 0, 0.3) 51%, transparent 52%),
@@ -130,6 +177,12 @@ td {
     animation: humanityFlicker 4s ease-in-out infinite;
 }
 
+.player1.winning-token {
+    animation: winningTokenOrange 1.5s ease-in-out infinite;
+    transform: scale(1.1);
+    z-index: 10;
+}
+
 .player1::after {
     content: '';
     position: absolute;
@@ -168,6 +221,12 @@ td {
     border: 1.5px solid #0a1520;
     position: relative;
     animation: soulShimmer 4s ease-in-out infinite;
+}
+
+.player2.winning-token {
+    animation: winningTokenBlue 1.5s ease-in-out infinite;
+    transform: scale(1.1);
+    z-index: 10;
 }
 
 .player2::after {
@@ -373,5 +432,92 @@ td {
     }
     100% {
         transform: translateY(0) rotate(360deg);
+    }
+}
+
+@keyframes victoryPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.95;
+    }
+}
+
+@keyframes boardGlowOrange {
+    0%, 100% {
+        box-shadow: 
+            0 0 30px rgba(255, 69, 0, 0.6),
+            0 0 60px rgba(255, 69, 0, 0.4),
+            0 10px 40px rgba(0, 0, 0, 0.5),
+            inset 0 0 30px rgba(255, 69, 0, 0.15);
+    }
+    50% {
+        box-shadow: 
+            0 0 45px rgba(255, 69, 0, 0.8),
+            0 0 80px rgba(255, 69, 0, 0.5),
+            0 10px 40px rgba(0, 0, 0, 0.5),
+            inset 0 0 40px rgba(255, 69, 0, 0.25);
+    }
+}
+
+@keyframes boardGlowBlue {
+    0%, 100% {
+        box-shadow: 
+            0 0 30px rgba(0, 191, 255, 0.6),
+            0 0 60px rgba(0, 191, 255, 0.4),
+            0 10px 40px rgba(0, 0, 0, 0.5),
+            inset 0 0 30px rgba(0, 191, 255, 0.15);
+    }
+    50% {
+        box-shadow: 
+            0 0 45px rgba(0, 191, 255, 0.8),
+            0 0 80px rgba(0, 191, 255, 0.5),
+            0 10px 40px rgba(0, 0, 0, 0.5),
+            inset 0 0 40px rgba(0, 191, 255, 0.25);
+    }
+}
+
+@keyframes winningTokenOrange {
+    0%, 100% {
+        box-shadow: 
+            0 0 30px rgba(255, 69, 0, 0.9),
+            0 0 50px rgba(255, 69, 0, 0.6),
+            0 0 70px rgba(255, 69, 0, 0.3),
+            0 5px 15px rgba(0, 0, 0, 0.9),
+            inset 0 0 40px rgba(255, 100, 0, 0.5);
+        transform: scale(1.1);
+    }
+    50% {
+        box-shadow: 
+            0 0 40px rgba(255, 69, 0, 1),
+            0 0 70px rgba(255, 69, 0, 0.7),
+            0 0 100px rgba(255, 69, 0, 0.4),
+            0 5px 15px rgba(0, 0, 0, 0.9),
+            inset 0 0 50px rgba(255, 100, 0, 0.7);
+        transform: scale(1.15);
+    }
+}
+
+@keyframes winningTokenBlue {
+    0%, 100% {
+        box-shadow: 
+            0 0 30px rgba(0, 191, 255, 0.9),
+            0 0 50px rgba(0, 191, 255, 0.6),
+            0 0 70px rgba(0, 191, 255, 0.3),
+            0 5px 15px rgba(0, 0, 0, 0.9),
+            inset 0 0 40px rgba(100, 200, 255, 0.5);
+        transform: scale(1.1);
+    }
+    50% {
+        box-shadow: 
+            0 0 40px rgba(0, 191, 255, 1),
+            0 0 70px rgba(0, 191, 255, 0.7),
+            0 0 100px rgba(0, 191, 255, 0.4),
+            0 5px 15px rgba(0, 0, 0, 0.9),
+            inset 0 0 50px rgba(100, 200, 255, 0.7);
+        transform: scale(1.15);
     }
 }
