@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const boardContainer = document.querySelector('.board-container');
             const statusElement = document.querySelector('.status');
             
-            // Déterminer quel joueur a gagné
             if (statusText.includes('joueur 1')) {
                 boardContainer.classList.add('victory-player1');
                 statusElement.classList.add('victory', 'player1-win');
@@ -36,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Vérifier au chargement de la page si c'est déjà une victoire
     checkVictory();
 
     table.addEventListener('mouseover', (e) => {
@@ -79,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const cell = e.target;
         if (cell.tagName === 'TD') {
             const statusText = document.querySelector('.status').textContent;
-            if (statusText.includes('gagné') || statusText.includes('Match nul')) {
+            if (statusText.includes('Victoire') || statusText.includes('Match nul')) {
                 return; 
             }
 
@@ -118,7 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         const newStatus = doc.querySelector('.status').innerHTML;
                         document.querySelector('.status').innerHTML = newStatus;
                         
-                        // Vérifier si quelqu'un a gagné
                         setTimeout(() => {
                             checkVictory();
                         }, 700);
