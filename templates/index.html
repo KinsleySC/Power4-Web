@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Puissance 4</title>
@@ -7,63 +7,36 @@
 </head>
 <body>
     <h1>Puissance 4</h1>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Puissance 4</title>
-    <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
-    <main>
-        <h1>Puissance 4</h1>
 
-        <form method="POST" action="/play">
-            <button type="submit">Jouer</button>
+    <div class="status">
+        {{ if .GameOver }}
+            {{ if eq .Winner 0 }}
+                Partie terminée : Match nul !
+            {{ else }}
+                Le joueur {{ .Winner }} a gagné !
+            {{ end }}
+        {{ else }}
+            Au tour du joueur {{ .Current }}
+        {{ end }}
+    </div>
+
+    <div class="board-container">
+        <table>
+            {{ range $i, $row := .Board }}
+            <tr>
+                {{ range $j, $cell := $row }}
+                <td data-column="{{ $j }}" class="{{ if eq $cell 1 }}player1{{ else if eq $cell 2 }}player2{{ end }}"></td>
+                {{ end }}
+            </tr>
+            {{ end }}
+        </table>
+    </div>
+
+    <div class="reset-button">
+        <form method="POST" action="/reset">
+            <button type="submit">Recommencer</button>
         </form>
-
-        <canvas id="structure" width="2000" height="650">Votre navigateur ne supporte pas &lt;canvas&gt;.</canvas>
-    </main>
-
-    <script src="/static/main.js" defer></script>
+    </div>
+    <script src="/static/script.js"></script>
 </body>
 </html>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Puissance 4</title>
-    <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
-    <main>
-        <h1>Puissance 4</h1>
-
-        <form method="POST" action="/play">
-            <button type="submit">Jouer</button>
-        </form>
-
-        <canvas id="structure" width="2000" height="650">Votre navigateur ne supporte pas &lt;canvas&gt;.</canvas>
-    </main>
-
-    <script src="/static/main.js" defer></script>
-</body>
-</html>
-   
-        </script> 
-    
-     
-    </body>
-</body>
-</html>
-<!image>
-<image>
-<body>
-
-<h2> image</h2>
-<img src="power-4Web.jpg" alt="power4-Web" width="1000" height="500">
-
-</body>
-</image>/home/onis/Images/Captures d’écran/Capture d’écran du 2025-10-28 11-38-58.png

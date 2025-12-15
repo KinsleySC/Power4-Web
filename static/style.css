@@ -1,16 +1,284 @@
-/* Basic styles for Power4-Web */
-:root{ --bg:#f5f7fb; --text:#222 }
 body {
-	font-family: Arial, Helvetica, sans-serif;
-	margin: 20px;
-	background: var(--bg);
-	color: var(--text);
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
 }
 
-main{ max-width:1200px; margin:0 auto }
+@font-face {
+    font-family: 'OptimusPrinceps';
+    src: url('/static/fonts/OptimusPrinceps.ttf') format('truetype');
+}
 
-h1{ margin-bottom:10px }
+h1 {
+    font-family: 'OptimusPrinceps', serif;
+    font-size: 4.5em;
+    color: #c7b377;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 40px;
+    text-shadow: 0 0 10px rgba(199, 179, 119, 0.5);
+    font-weight: normal;
+}
 
-canvas#structure{ display:block; width:100%; height:auto; border:1px solid #ddd }
+.status {
+    font-family: 'OptimusPrinceps', serif;
+    margin: 20px;
+    font-size: 2em;
+    color: #333;
+    letter-spacing: 1px;
+}
 
-button{ padding:8px 14px; font-size:16px; cursor:pointer }
+.board-container {
+    display: inline-block;
+    background: linear-gradient(135deg, #4a4a4a 0%, #3a3a3a 50%, #2a2a2a 100%);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 30px;
+    position: relative;
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.5),
+        inset 0 0 30px rgba(0, 0, 0, 0.3);
+
+    background-image: 
+        linear-gradient(95deg, transparent 48%, rgba(0, 0, 0, 0.3) 49%, rgba(0, 0, 0, 0.3) 51%, transparent 52%),
+        linear-gradient(170deg, transparent 28%, rgba(0, 0, 0, 0.2) 29%, rgba(0, 0, 0, 0.2) 30%, transparent 31%),
+        linear-gradient(25deg, transparent 68%, rgba(0, 0, 0, 0.2) 69%, rgba(0, 0, 0, 0.2) 70%, transparent 71%),
+        linear-gradient(140deg, transparent 48%, rgba(0, 0, 0, 0.15) 49%, rgba(0, 0, 0, 0.15) 50%, transparent 51%),
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 3px,
+            rgba(0, 0, 0, 0.05) 3px,
+            rgba(0, 0, 0, 0.05) 6px
+        ),
+        repeating-linear-gradient(
+            -45deg,
+            transparent,
+            transparent 3px,
+            rgba(0, 0, 0, 0.05) 3px,
+            rgba(0, 0, 0, 0.05) 6px
+        ),
+        radial-gradient(circle at 20% 30%, rgba(0, 0, 0, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(0, 0, 0, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(0, 0, 0, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 70% 20%, rgba(0, 0, 0, 0.08) 0%, transparent 40%),
+        linear-gradient(135deg, #4a4a4a 0%, #3a3a3a 50%, #2a2a2a 100%);
+    
+    clip-path: polygon(
+        1% 0%, 3% 1%, 5% 0%, 7% 2%, 9% 1%, 11% 0%, 13% 2%, 15% 1%, 17% 0%, 19% 2%, 
+        21% 1%, 23% 0%, 25% 2%, 27% 0%, 29% 1%, 31% 0%, 33% 2%, 35% 1%, 37% 0%, 39% 2%,
+        41% 1%, 43% 0%, 45% 2%, 47% 1%, 49% 0%, 51% 2%, 53% 1%, 55% 0%, 57% 2%, 59% 1%,
+        61% 0%, 63% 2%, 65% 1%, 67% 0%, 69% 2%, 71% 1%, 73% 0%, 75% 2%, 77% 1%, 79% 0%,
+        81% 2%, 83% 1%, 85% 0%, 87% 2%, 89% 1%, 91% 0%, 93% 2%, 95% 1%, 97% 0%, 99% 2%,
+        100% 3%, 99% 5%, 100% 7%, 98% 9%, 100% 11%, 99% 13%, 100% 15%, 98% 17%, 100% 19%,
+        99% 21%, 100% 23%, 98% 25%, 100% 27%, 99% 29%, 100% 31%, 98% 33%, 100% 35%, 99% 37%,
+        100% 39%, 98% 41%, 100% 43%, 99% 45%, 100% 47%, 98% 49%, 100% 51%, 99% 53%, 100% 55%,
+        98% 57%, 100% 59%, 99% 61%, 100% 63%, 98% 65%, 100% 67%, 99% 69%, 100% 71%, 98% 73%,
+        100% 75%, 99% 77%, 100% 79%, 98% 81%, 100% 83%, 99% 85%, 100% 87%, 98% 89%, 100% 91%,
+        99% 93%, 100% 95%, 98% 97%, 100% 99%, 99% 100%, 97% 99%, 95% 100%, 93% 98%, 91% 100%,
+        89% 99%, 87% 100%, 85% 98%, 83% 100%, 81% 99%, 79% 100%, 77% 98%, 75% 100%, 73% 99%,
+        71% 100%, 69% 98%, 67% 100%, 65% 99%, 63% 100%, 61% 98%, 59% 100%, 57% 99%, 55% 100%,
+        53% 98%, 51% 100%, 49% 99%, 47% 100%, 45% 98%, 43% 100%, 41% 99%, 39% 100%, 37% 98%,
+        35% 100%, 33% 99%, 31% 100%, 29% 98%, 27% 100%, 25% 99%, 23% 100%, 21% 98%, 19% 100%,
+        17% 99%, 15% 100%, 13% 98%, 11% 100%, 9% 99%, 7% 100%, 5% 98%, 3% 100%, 1% 99%,
+        0% 97%, 2% 95%, 0% 93%, 1% 91%, 0% 89%, 2% 87%, 0% 85%, 1% 83%, 0% 81%, 2% 79%,
+        0% 77%, 1% 75%, 0% 73%, 2% 71%, 0% 69%, 1% 67%, 0% 65%, 2% 63%, 0% 61%, 1% 59%,
+        0% 57%, 2% 55%, 0% 53%, 1% 51%, 0% 49%, 2% 47%, 0% 45%, 1% 43%, 0% 41%, 2% 39%,
+        0% 37%, 1% 35%, 0% 33%, 2% 31%, 0% 29%, 1% 27%, 0% 25%, 2% 23%, 0% 21%, 1% 19%,
+        0% 17%, 2% 15%, 0% 13%, 1% 11%, 0% 9%, 2% 7%, 0% 5%, 1% 3%
+    );
+}
+
+table {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+td {
+    width: 80px;
+    height: 80px;
+    border: none;
+    background-color: rgb(0, 0, 0);
+    border-radius: 50%;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.player1 {
+    background: radial-gradient(circle at 35% 35%, #ff6b00, #ff4500, #cc3700, #8b0000, #3a0000);
+    box-shadow: 0 0 15px rgba(255, 69, 0, 0.5),
+                0 0 30px rgba(255, 100, 0, 0.25),
+                inset 0 0 20px rgba(255, 140, 0, 0.3),
+                inset -10px -10px 25px rgba(0, 0, 0, 0.7),
+                inset 5px 5px 15px rgba(255, 200, 0, 0.2);
+    border: none;
+    animation: emberPulse 2s ease-in-out infinite;
+}
+
+.player2 {
+    background: radial-gradient(circle at 35% 35%, #5fceeb, #48d1cc, #20b2aa, #104e8b, #002040);
+    box-shadow: 0 0 15px rgba(72, 209, 204, 0.5),
+                0 0 30px rgba(100, 220, 220, 0.25),
+                inset 0 0 20px rgba(224, 255, 255, 0.3),
+                inset -10px -10px 25px rgba(0, 0, 0, 0.7),
+                inset 5px 5px 15px rgba(150, 240, 255, 0.2);
+    border: none;
+    animation: soulPulse 2s ease-in-out infinite;
+}
+
+.dropping {
+    animation: dropToken 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    transform-origin: center center;
+}
+
+.hover-effect-1 {
+    background: radial-gradient(circle at 35% 35%, rgba(255, 107, 0, 0.35), rgba(255, 69, 0, 0.25), rgba(204, 55, 0, 0.15)) !important;
+    box-shadow: 0 0 12px rgba(255, 69, 0, 0.4),
+                0 0 25px rgba(255, 100, 0, 0.2),
+                inset 0 0 15px rgba(255, 140, 0, 0.25),
+                inset -8px -8px 20px rgba(0, 0, 0, 0.5);
+    border: none;
+    animation: emberPulse 1.5s ease-in-out infinite;
+}
+
+.hover-effect-2 {
+    background: radial-gradient(circle at 35% 35%, rgba(95, 206, 235, 0.35), rgba(72, 209, 204, 0.25), rgba(32, 178, 170, 0.15)) !important;
+    box-shadow: 0 0 12px rgba(72, 209, 204, 0.4),
+                0 0 25px rgba(100, 220, 220, 0.2),
+                inset 0 0 15px rgba(224, 255, 255, 0.25),
+                inset -8px -8px 20px rgba(0, 0, 0, 0.5);
+    border: none;
+    animation: soulPulse 1.5s ease-in-out infinite;
+}
+
+.reset-button {
+    margin-top: 30px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reset-button button { 
+    border: 3px solid;
+    background: black; 
+    width: 300px;
+    height: 65px;
+    border-radius: 100px; 
+    color: white; 
+    font-family: 'OptimusPrinceps', serif;
+    font-size: 26px;
+    font-weight: normal; 
+    cursor: pointer; 
+    text-transform: uppercase;
+    animation: borderRainbow 5s linear infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0;
+    letter-spacing: -0.5px;
+    transform: translateY(2px);
+    transition: transform 0.3s ease;
+    text-indent: -2px;
+} 
+
+.reset-button button:hover {
+    transform: scale(1.1);
+}
+
+@keyframes rainbow {
+    0% { background: #ff0000; }
+    40% { background: #ff8800; }
+    60% { background: #ffff00; }
+    80% { background: #00ff00; }
+    100% { background: #0000ff; }
+    120% { background: #ff0000; }
+}
+
+@keyframes borderRainbow {
+    0% { border-color: #ff0000; }
+    20% { border-color: #ff8800; }
+    40% { border-color: #ffff00; }
+    60% { border-color: #00ff00; }
+    80% { border-color: #0000ff; }
+    100% { border-color: #ff0000; }
+}
+
+@keyframes ember {
+    0%, 100% { box-shadow: 0 0 15px #ff4500, 0 0 25px #ff6b08, inset 0 0 20px rgba(255, 69, 0, 0.7); }
+    50% { box-shadow: 0 0 20px #ff4500, 0 0 35px #ff6b08, inset 0 0 25px rgba(255, 69, 0, 0.9); }
+}
+
+@keyframes soul {
+    0%, 100% { box-shadow: 0 0 15px #48d1cc, 0 0 25px #e0ffff, inset 0 0 20px rgba(224, 255, 255, 0.7); }
+    50% { box-shadow: 0 0 20px #48d1cc, 0 0 35px #e0ffff, inset 0 0 25px rgba(224, 255, 255, 0.9); }
+}
+
+@keyframes emberPulse {
+    0%, 100% { 
+        box-shadow: 0 0 15px rgba(255, 69, 0, 0.5),
+                   0 0 30px rgba(255, 100, 0, 0.25),
+                   inset 0 0 20px rgba(255, 140, 0, 0.3),
+                   inset -10px -10px 25px rgba(0, 0, 0, 0.7),
+                   inset 5px 5px 15px rgba(255, 200, 0, 0.2);
+        filter: brightness(1);
+    }
+    50% { 
+        box-shadow: 0 0 20px rgba(255, 69, 0, 0.65),
+                   0 0 40px rgba(255, 100, 0, 0.35),
+                   inset 0 0 25px rgba(255, 140, 0, 0.4),
+                   inset -10px -10px 25px rgba(0, 0, 0, 0.7),
+                   inset 5px 5px 18px rgba(255, 200, 0, 0.3);
+        filter: brightness(1.1);
+    }
+}
+
+@keyframes soulPulse {
+    0%, 100% { 
+        box-shadow: 0 0 15px rgba(72, 209, 204, 0.5),
+                   0 0 30px rgba(100, 220, 220, 0.25),
+                   inset 0 0 20px rgba(224, 255, 255, 0.3),
+                   inset -10px -10px 25px rgba(0, 0, 0, 0.7),
+                   inset 5px 5px 15px rgba(150, 240, 255, 0.2);
+        filter: brightness(1);
+    }
+    50% { 
+        box-shadow: 0 0 20px rgba(72, 209, 204, 0.65),
+                   0 0 40px rgba(100, 220, 220, 0.35),
+                   inset 0 0 25px rgba(224, 255, 255, 0.4),
+                   inset -10px -10px 25px rgba(0, 0, 0, 0.7),
+                   inset 5px 5px 18px rgba(150, 240, 255, 0.3);
+        filter: brightness(1.1);
+    }
+}
+
+@keyframes dropToken {
+    0% {
+        transform: translateY(calc(-1 * var(--drop-distance))) rotate(0deg);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateY(calc(-0.5 * var(--drop-distance))) rotate(180deg);
+        opacity: 0.85;
+    }
+    70% {
+        transform: translateY(30px) rotate(360deg);
+        opacity: 1;
+    }
+    85% {
+        transform: translateY(-15px) rotate(360deg);
+    }
+    92% {
+        transform: translateY(7px) rotate(360deg);
+    }
+    96% {
+        transform: translateY(-3px) rotate(360deg);
+    }
+    100% {
+        transform: translateY(0) rotate(360deg);
+    }
+}
