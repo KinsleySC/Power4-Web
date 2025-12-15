@@ -41,16 +41,15 @@ func (g *Game) CheckWin(row, col int) bool {
 	player := g.Board[row][col]
 
 	directions := [][2]int{
-		{0, 1},  // horizontal
-		{1, 0},  // vertical
-		{1, 1},  // diagonale \
-		{1, -1}, // diagonale /
+		{0, 1},
+		{1, 0},
+		{1, 1},
+		{1, -1},
 	}
 
 	for _, d := range directions {
-		count := 1 // Compte le jeton actuel
+		count := 1
 
-		// Compter dans la direction positive
 		for i := 1; i < 4; i++ {
 			r := row + d[0]*i
 			c := col + d[1]*i
@@ -60,7 +59,6 @@ func (g *Game) CheckWin(row, col int) bool {
 			count++
 		}
 
-		// Compter dans la direction négative
 		for i := 1; i < 4; i++ {
 			r := row - d[0]*i
 			c := col - d[1]*i
